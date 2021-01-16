@@ -9,4 +9,4 @@
 
 ### Using
 ##### To run the script, please execute the command ` python filename where:
-- filename(optional) - `task3.py
+- filename(optional) - `task3.py`
