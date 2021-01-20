@@ -18,7 +18,7 @@ class CoreSchool(SchoolInterface):
         person = arr[1]
         key = arr[0]
         self.role[group][key].append(person)
-        print('Person ' + arr[1]['first_name'] + ' ' + arr[1]['last_name'] + ' has been added to ' + arr[2] + '-group with key ' + arr[0])
+        print('Person ' + arr[1].first_name + ' ' + arr[1].last_name + ' has been added to ' + arr[2] + '-group with key ' + arr[0])
 
     def execute(self):
         arr = self.create_arr()
@@ -29,10 +29,10 @@ class CoreSchool(SchoolInterface):
 
     def create_arr(self):
         arr = None
-        if self.info['role'] in self.role['teachers'].keys():
+        if self.info.role in self.role['teachers'].keys():
             status = 'teachers'
-            arr = [self.info['role'], self.info, status]
-        elif self.info['role'] in self.role['students'].keys():
+            arr = [self.info.role, self.info, status]
+        elif self.info.role in self.role['students'].keys():
             status = 'students'
-            arr = [self.info['role'], self.info, status]
+            arr = [self.info.role, self.info, status]
         return arr
