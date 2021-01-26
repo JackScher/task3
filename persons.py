@@ -81,13 +81,14 @@
 
 
 class BasePerson:
-    def __init__(self, first_name, last_name, age, role):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.age = age
-        self.role = role
-        self.data_arr = [self.first_name, self.last_name, self.age, self.role]
+    def __init__(self, person_data_dict):
+        for name, value in person_data_dict.items():
+            try:
+                setattr(self, name, int(value))
+            except:
+                setattr(self, name, value)
 
+        self.data_arr = [self.first_name, self.last_name, self.age, self.role]
         self.main_data_info = {
             self.first_name: str,
             self.last_name: str,
@@ -110,28 +111,13 @@ class BasePerson:
                 return False
         return True
 
-    # def check_additional_data_is_valid(self):
-    #     for item in self.additional_data_info:
-    #         if self.additional_data_info[item] != type(item):
-    #             return False
-    #     return True
-    #
-    # def check_additional_data_is_not_null(self):
-    #     for item in self.additional_data_arr:
-    #         if item == '' or item is None:
-    #             return False
-    #     return True
-
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
 
 
 class Teacher(BasePerson):
-    def __init__(self, first_name, last_name, age, role, amount, currency, experience_month):
-        super().__init__(first_name, last_name, age, role)
-        self.amount = amount
-        self.currency = currency
-        self.experience_month = experience_month
+    def __init__(self, person_data_dict):
+        super().__init__(person_data_dict)
 
         self.additional_data_arr = [self.amount, self.currency, self.experience_month]
         self.additional_data_info = {
@@ -142,10 +128,9 @@ class Teacher(BasePerson):
 
 
 class Student(BasePerson):
-    def __init__(self, first_name, last_name, age, role, average_mark):
-        super().__init__(first_name, last_name, age, role)
+    def __init__(self, person_data_dict):
+        super().__init__(person_data_dict)
 
-        self.average_mark = average_mark
         self.additional_data_arr = [self.average_mark]
         self.additional_data_info = {
             self.average_mark: int

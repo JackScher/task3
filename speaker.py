@@ -25,10 +25,8 @@ class Speaker:
 
     def add_new_person(self):               # add_new_person - is right ?
         person_data = self.service.execute()
-        adapter = Adapter(self.service.roles, person_data)
-        new_object = adapter.create_object()
+        new_object = Adapter(self.service.roles, person_data).create_object()
         if new_object.is_valid_data_type(new_object.data_arr, new_object.main_data_info) and new_object.data_item_value_is_not_null(new_object.data_arr) and new_object.is_valid_data_type(new_object.additional_data_arr, new_object.additional_data_info) and new_object.data_item_value_is_not_null(new_object.additional_data_arr):
-            # CoreSchool(self.service.roles, new_object).execute()
             CoreSchool(new_object, self.service.roles).execute()
         else:
             print('Wrong input type. Try again!')
