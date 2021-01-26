@@ -23,12 +23,13 @@ class Speaker:
             print('Wrong choice.')
             return self.execute()
 
-    def add_new_person(self):
+    def add_new_person(self):               # add_new_person - is right ?
         person_data = self.service.execute()
         adapter = Adapter(self.service.roles, person_data)
         new_object = adapter.create_object()
-        if new_object.is_valid_data_type() and new_object.data_item_value_is_not_null():
-            CoreSchool(self.service.roles, new_object).execute()
+        if new_object.is_valid_data_type() and new_object.data_item_value_is_not_null() and new_object.check_additional_data_is_valid() and new_object.check_additional_data_is_not_null():
+            # CoreSchool(self.service.roles, new_object).execute()
+            CoreSchool(new_object, self.service.roles).execute()
         else:
             print('Wrong input type. Try again!')
             self.add_new_person()

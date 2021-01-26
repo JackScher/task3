@@ -18,11 +18,11 @@ class Service:
         }
 
     def execute(self):
-        data = {key: input('Input ' + key + ':') for key in self.main_fields}
-        if data['role'] in self.roles['teachers'] or data['role'] in self.roles['students']:
-            additional_data = self.input_personal_additional_data(data['role'])
-            data.update(additional_data)
-            return data
+        input_data = {key: input('Input ' + key + ':') for key in self.main_fields}
+        if input_data['role'] in self.roles['teachers'] or input_data['role'] in self.roles['students']:
+            additional_data = self.input_personal_additional_data(input_data['role'])
+            input_data.update(additional_data)
+            return input_data
         else:
             print('Wrong role. Try again!')
             return self.execute()
