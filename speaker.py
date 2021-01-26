@@ -1,3 +1,5 @@
+import sys
+
 from service import Service
 from adapter import Adapter
 from core import CoreSchool
@@ -18,7 +20,7 @@ class Speaker:
         elif choice == '2':
             self.check_persons_list()
         elif choice == '3':
-            return True
+            sys.exit()
         else:
             print('Wrong choice.')
             return self.execute()
@@ -26,11 +28,7 @@ class Speaker:
     def add_new_person(self):               # add_new_person - is right ?
         person_data = self.service.execute()
         new_object = Adapter(self.service.roles, person_data).create_object()
-        if new_object.is_valid_data_type(new_object.data_arr, new_object.main_data_info) and new_object.data_item_value_is_not_null(new_object.data_arr) and new_object.is_valid_data_type(new_object.additional_data_arr, new_object.additional_data_info) and new_object.data_item_value_is_not_null(new_object.additional_data_arr):
-            CoreSchool(new_object, self.service.roles).execute()
-        else:
-            print('Wrong input type. Try again!')
-            self.add_new_person()
+        self.is_new_object_data_valid(new_object)
         return self.execute()
 
     def check_persons_list(self):
@@ -41,3 +39,17 @@ class Speaker:
                 for obj in self.service.roles[group][role]:
                     print(obj)
         return self.execute()
+
+    def is_new_object_data_valid(self, new_object):
+        main_data = new_object.data_arr
+        main_data_info = new_object.main_data_info
+        additional_data = new_object.additional_data_arr
+        additional_data_info = new_object.additional_data_info
+        if new_object.is_valid_data_type(main_data, main_data_info) \
+                and new_object.data_item_value_is_not_null(main_data)\
+                and new_object.is_valid_data_type(additional_data, additional_data_info)\
+                and new_object.data_item_value_is_not_null(additional_data):
+            CoreSchool(new_object, self.service.roles).execute()
+        else:
+            print('Wrong input type. Try again!')
+            self.add_new_person()
