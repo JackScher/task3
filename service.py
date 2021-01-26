@@ -28,14 +28,14 @@ class Service:
             return self.execute()
 
     def input_personal_additional_data(self, role):
-        arr = []
+        additional_data_arr = []
         if role in self.roles['teachers']:
-            arr = self.create_personal_additional_data('teachers')
+            additional_data_arr = self.create_personal_additional_data('teachers')
         elif role in self.roles['students']:
-            arr = self.create_personal_additional_data('students')
-        return arr
+            additional_data_arr = self.create_personal_additional_data('students')
+        return additional_data_arr
 
     def create_personal_additional_data(self, mode):
         fields = [field for field in self.person_additional_data_fields[mode]]
-        arr = {key: input('Input ' + key + ':') for key in fields}
-        return arr
+        additional_data_arr = {key: input('Input ' + key + ':') for key in fields}
+        return additional_data_arr

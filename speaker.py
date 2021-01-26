@@ -27,7 +27,7 @@ class Speaker:
         person_data = self.service.execute()
         adapter = Adapter(self.service.roles, person_data)
         new_object = adapter.create_object()
-        if new_object.is_valid_data_type() and new_object.data_item_value_is_not_null() and new_object.check_additional_data_is_valid() and new_object.check_additional_data_is_not_null():
+        if new_object.is_valid_data_type(new_object.data_arr, new_object.main_data_info) and new_object.data_item_value_is_not_null(new_object.data_arr) and new_object.is_valid_data_type(new_object.additional_data_arr, new_object.additional_data_info) and new_object.data_item_value_is_not_null(new_object.additional_data_arr):
             # CoreSchool(self.service.roles, new_object).execute()
             CoreSchool(new_object, self.service.roles).execute()
         else:

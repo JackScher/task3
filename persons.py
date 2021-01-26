@@ -88,7 +88,7 @@ class BasePerson:
         self.role = role
         self.data_arr = [self.first_name, self.last_name, self.age, self.role]
 
-        self.data_info = {
+        self.main_data_info = {
             self.first_name: str,
             self.last_name: str,
             self.age: int,
@@ -98,29 +98,29 @@ class BasePerson:
         self.additional_data_arr = []
         self.additional_data_info = {}
 
-    def is_valid_data_type(self):
-        for item in self.data_arr:
-            if self.data_info[item] != type(item):
+    def is_valid_data_type(self, input_fields_arr, right_fields_info):
+        for item in input_fields_arr:
+            if right_fields_info[item] != type(item):
                 return False
         return True
 
-    def data_item_value_is_not_null(self):
-        for item in self.data_arr:
+    def data_item_value_is_not_null(self, input_fields_arr):
+        for item in input_fields_arr:
             if item == '' or item is None:
                 return False
         return True
 
-    def check_additional_data_is_valid(self):
-        for item in self.additional_data_info:
-            if self.additional_data_info[item] != type(item):
-                return False
-        return True
-
-    def check_additional_data_is_not_null(self):
-        for item in self.additional_data_arr:
-            if item == '' or item is None:
-                return False
-        return True
+    # def check_additional_data_is_valid(self):
+    #     for item in self.additional_data_info:
+    #         if self.additional_data_info[item] != type(item):
+    #             return False
+    #     return True
+    #
+    # def check_additional_data_is_not_null(self):
+    #     for item in self.additional_data_arr:
+    #         if item == '' or item is None:
+    #             return False
+    #     return True
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
